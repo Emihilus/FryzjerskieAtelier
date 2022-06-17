@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home_events_list">
+
+    <fragment
+        android:id="@+id/nav_home_events_list"
+        android:name="emis.dsw.atelier.ui.home.HomeEventsListFragment"
+        android:label="@string/menu_events_list"
+        tools:layout="@layout/fragment_home_events_list" />
+
+    <fragment
+        android:id="@+id/nav_services_list"
+        android:name="emis.dsw.atelier.ui.servicesList.ServicesListFragment"
+        android:label="@string/menu_services_list"
+        tools:layout="@layout/fragment_services_list" />
+
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="emis.dsw.atelier.ui.calendar.CalendarFragment"
+        android:label="@string/menu_calendar"
+        tools:layout="@layout/fragment_calendar" />
+</navigation>

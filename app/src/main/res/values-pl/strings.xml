@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FryzjerskieAtelier</string>
+    <string name="navigation_drawer_open">Otwóz navigation drawer</string>
+    <string name="navigation_drawer_close">Zamknij navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Nagłóek nawigacji</string>
+    <string name="action_settings">Ustawienia</string>
+
+    <string name="menu_events_list">Moje spotkania</string>
+    <string name="menu_calendar">Kalendarz</string>
+    <string name="menu_services_list">Lista usług</string>
+</resources>
