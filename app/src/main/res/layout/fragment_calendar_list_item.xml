@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:id="@+id/calendar_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+    <TextView
+        android:id="@+id/calendar_hour"
+        android:textAlignment="textStart"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/calendar_status"
+        android:textAlignment="textEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+</LinearLayout>

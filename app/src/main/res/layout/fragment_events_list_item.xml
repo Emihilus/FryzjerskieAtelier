@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  Single List Item Design -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/label"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dip"
-    android:textSize="16dip"
-    android:textStyle="bold" >
-</TextView>
+<LinearLayout
+    android:id="@+id/my_events_service_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+    <TextView
+        android:id="@+id/my_events_service_name"
+        android:layout_width="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_weight="0"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_weight="0"
+        android:padding="10dip"
+        android:text=" - "
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/my_events_service_cost"
+        android:textAlignment="textStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/my_events_service_when"
+        android:layout_weight="1"
+        android:textAlignment="textEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+</LinearLayout>

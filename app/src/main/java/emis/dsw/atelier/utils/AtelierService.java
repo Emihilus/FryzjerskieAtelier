@@ -1,33 +1,38 @@
 package emis.dsw.atelier.utils;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 public class AtelierService {
 
     public static final String HOST = "http://10.0.2.2/AtelierService/";
+    public static int serviceId;
+    public static String day;
+    public static int slot;
 
     public static JSONArray getServices() {
 
-        return httpPostRequest("actions/getServices.php");
+        return httpPostRequest("actions/getServices.php", "");
     }
 
     public static JSONArray getMyEvents() {
-        return httpPostRequest("actions/getMyEvents.php");
+        return httpPostRequest("actions/getMyEvents.php", "");
     }
 
-    public static JSONArray httpPostRequest(String action) {
+    public static JSONArray getEventsOfDay(String date) {
+        date = "date="+date;
+        return httpPostRequest("actions/getEventsOfDay.php", date);
+    }
+
+    public static JSONArray httpPostRequest(String action, String payload) {
         String response = "";
 
         String url = HOST + action;
@@ -41,7 +46,7 @@ public class AtelierService {
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 
-            wr.write(url);
+            wr.write(payload);
             wr.flush();
 
             Log.d("post response code", conn.getResponseCode() + " ");
@@ -76,5 +81,31 @@ public class AtelierService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String getHour(int slot) {
+
+        switch (slot) {
+            case 1:
+                return "9:00";
+            case 2:
+                return "10:00";
+            case 3:
+                return "11:00";
+            case 4:
+                return "12:00";
+            case 5:
+                return "13:00";
+            case 6:
+                return "14:00";
+            case 7:
+                return "15:00";
+            case 8:
+                return "16:00";
+            case 9:
+                return "17:00";
+
+        }
+        return "";
     }
 }

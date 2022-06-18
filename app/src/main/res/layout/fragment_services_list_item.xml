@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:id="@+id/services_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+    <TextView
+        android:id="@+id/services_name"
+        android:textAlignment="textStart"
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/services_cost"
+        android:textAlignment="textEnd"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+    <TextView
+        android:text=" PLN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:paddingRight="10dip"
+        android:paddingBottom="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"/>
+
+</LinearLayout>

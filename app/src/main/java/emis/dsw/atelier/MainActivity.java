@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    public NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home_events_list, R.id.nav_services_list, R.id.nav_calendar)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
 
 
     }
