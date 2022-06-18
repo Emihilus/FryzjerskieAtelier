@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home_events_list"
-        android:name="emis.dsw.atelier.ui.home.HomeEventsListFragment"
+        android:name="emis.dsw.atelier.ui.homeEventsList.HomeEventsListFragment"
         android:label="@string/menu_events_list"
         tools:layout="@layout/fragment_home_events_list" />
 
