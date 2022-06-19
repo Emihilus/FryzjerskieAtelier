@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.ConnectException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpCookie;
@@ -25,7 +26,7 @@ public class AtelierService {
 
 
     public static boolean rejectEvent(String event) {
-        String payload = "event="+event;
+        String payload = "event=" + event;
         try {
             return ((JSONObject) httpPostRequest("actions/admin/rejectEvent.php", payload)).getInt("status") == 1;
         } catch (Exception e) {
@@ -35,7 +36,7 @@ public class AtelierService {
     }
 
     public static boolean acceptEvent(String event) {
-        String payload = "event="+event;
+        String payload = "event=" + event;
         try {
             return ((JSONObject) httpPostRequest("actions/admin/acceptEvent.php", payload)).getInt("status") == 1;
         } catch (Exception e) {
@@ -159,6 +160,13 @@ public class AtelierService {
                 AtelierService.cookie = cookie.toString();
             }
 
+        } catch (ConnectException ex) {
+            ex.printStackTrace();
+            try {
+                return new JSONObject("{\"status\":\"-2\"}");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
