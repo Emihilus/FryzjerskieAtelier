@@ -16,7 +16,7 @@
             android:layout_weight="0"
             android:layout_height="wrap_content"
             android:padding="10dip"
-            android:text="Nazwa uslugi - Koszt"
+            android:text="Nazwa uslugi"
             android:textSize="16dip"
             android:textStyle="bold"/>
         <TextView

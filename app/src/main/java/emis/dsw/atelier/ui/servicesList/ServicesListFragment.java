@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import emis.dsw.atelier.MainActivity;
 import emis.dsw.atelier.R;
 import emis.dsw.atelier.databinding.FragmentServicesListBinding;
 import emis.dsw.atelier.ui.homeEventsList.HomeEventsListFragment;
@@ -24,7 +26,6 @@ import emis.dsw.atelier.utils.AtelierService;
 
 public class ServicesListFragment extends Fragment {
 
-    private FragmentServicesListBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class ServicesListFragment extends Fragment {
 
         private Context context;
         private JSONArray source;
+        int serviceId = 0;
 
         public ServicesListViewAdapter(Context context, JSONArray source) {
             this.context = context;
@@ -106,8 +108,43 @@ public class ServicesListFragment extends Fragment {
                 e.printStackTrace();
             }
 
+            try {
+                serviceId = source.getJSONObject(position).getInt("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             ((TextView) convertView.findViewById(R.id.services_name)).setText(serviceName);
             ((TextView) convertView.findViewById(R.id.services_cost)).setText(serviceCost);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(AtelierService.day != null && !AtelierService.day.equals("")  && AtelierService.slot != 0) {
+
+                        new AsyncTask<Void, Void, Void>() {
+
+                            @Override
+                            protected Void doInBackground(final Void... params) {
+
+                                AtelierService.addEvent(serviceId, AtelierService.day, AtelierService.slot);
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void unused) {
+                                AtelierService.day = "";
+                                AtelierService.slot = 0;
+                                Toast.makeText(context,"Termin został wysłany do akceptacji", Toast.LENGTH_LONG).show();
+                                ((MainActivity) getActivity()).navController.navigate(R.id.nav_calendar);
+                                super.onPostExecute(unused);
+                            }
+                        }.execute();
+
+                    }
+                }
+            });
+
             return convertView;
         }
     }

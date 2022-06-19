@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.147" />
+        <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.201" />
+        <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/drawable/ic_launcher_background.xml" value="0.147" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1815" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/drawable/side_nav_bar.xml" value="0.332" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/app_bar_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/dialog_register.xml" value="0.1580547112462006" />
+        <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/dialog_signin.xml" value="0.15982776089159068" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/fragment_calendar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/fragment_clendar_list_item.xml" value="0.1651469098277609" />
         <entry key="..\:/Users/emazur/AndroidStudioProjects/FryzjerskieAtelier/app/src/main/res/layout/fragment_events_list_item.xml" value="0.14402173913043478" />

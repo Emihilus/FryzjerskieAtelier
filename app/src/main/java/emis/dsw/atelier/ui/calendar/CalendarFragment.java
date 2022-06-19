@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,26 @@ public class CalendarFragment extends Fragment {
 
         ListView listView = root.findViewById(R.id.slots_list);
 
+
+        new AsyncTask<Void, Void, Void>() {
+            JSONArray response;
+            String date;
+
+            @Override
+            protected Void doInBackground(final Void... params) {
+                date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
+                response = AtelierService.getEventsOfDay(date);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(final Void result) {
+                listView.setAdapter(new CalendarFragment.CalendarListViewAdapter(getContext(), response, date));
+            }
+        }.execute();
+
+
         CalendarView calendarView = root.findViewById(R.id.simpleCalendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -59,6 +80,7 @@ public class CalendarFragment extends Fragment {
                 }.execute();
             }
         });
+
         return root;
     }
 
@@ -117,7 +139,6 @@ public class CalendarFragment extends Fragment {
                 convertView = LayoutInflater.from(context).
                         inflate(R.layout.fragment_calendar_list_item, parent, false);
             }
-
             String slotStatus = "";
 
             int colorResId = 0;
@@ -132,18 +153,15 @@ public class CalendarFragment extends Fragment {
                     public void onClick(View view) {
                         AtelierService.day = date;
                         AtelierService.slot = position+1;
+                        Toast.makeText(context,"Wybierz usługe na którą chcesz się umówić", Toast.LENGTH_LONG).show();
                         ((MainActivity) getActivity()).navController.navigate(R.id.nav_services_list);
                     }
                 });
             }
-
             convertView.findViewById(R.id.calendar_item).setBackgroundColor(context.getResources().getColor(colorResId));
-
 
             ((TextView) convertView.findViewById(R.id.calendar_hour)).setText(slotEntry[position].cpt);
             ((TextView) convertView.findViewById(R.id.calendar_status)).setText(slotStatus);
-
-
 
             return convertView;
         }

@@ -2,6 +2,7 @@ package emis.dsw.atelier.ui.homeEventsList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,13 +11,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import emis.dsw.atelier.MainActivity;
 import emis.dsw.atelier.R;
 import emis.dsw.atelier.utils.AtelierService;
 
@@ -63,7 +67,13 @@ public class HomeEventsListFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return source.length();
+            int length = 0;
+            try {
+                length = source.length();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return length;
         }
 
         @Override
@@ -88,6 +98,14 @@ public class HomeEventsListFragment extends Fragment {
                         inflate(R.layout.fragment_events_list_item, parent, false);
             }
 
+            String eventId = "";
+
+            try {
+                eventId = source.getJSONObject(position).getString("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             String serviceName = "";
 
             try {
@@ -96,19 +114,11 @@ public class HomeEventsListFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            String serviceCost = "";
-
-            try {
-                serviceCost = source.getJSONObject(position).getString("cost");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
             String eventDatetime = "";
 
             try {
                 eventDatetime = source.getJSONObject(position).getString("date_id") + " "
-                + AtelierService.getHour(source.getJSONObject(position).getInt("slot"));
+                        + AtelierService.getHour(source.getJSONObject(position).getInt("slot"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -137,8 +147,78 @@ public class HomeEventsListFragment extends Fragment {
             convertView.findViewById(R.id.my_events_service_item).setBackgroundColor(context.getResources().getColor(colorResId));
 
             ((TextView) convertView.findViewById(R.id.my_events_service_name)).setText(serviceName);
-            ((TextView) convertView.findViewById(R.id.my_events_service_cost)).setText(serviceCost);
             ((TextView) convertView.findViewById(R.id.my_events_service_when)).setText(eventDatetime);
+
+            String finalEventId = eventId;
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new AlertDialog.Builder(context)
+                            .setTitle("Zmien status zgłoszenia")
+                            .setMessage("Zmien status zgłoszenia")
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton("Akceptuj", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new AsyncTask<Void, Void, Void>() {
+
+                                        boolean result;
+
+                                        @Override
+                                        protected Void doInBackground(final Void... params) {
+
+                                            result = AtelierService.acceptEvent(finalEventId);
+                                            return null;
+                                        }
+
+                                        @Override
+                                        protected void onPostExecute(Void unused) {
+                                            ((MainActivity) getActivity()).navController.navigate(R.id.nav_home_events_list);
+                                            if (result) {
+                                                Toast.makeText(context, "Zaakceptowano", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(context, "Brak uprawnień", Toast.LENGTH_LONG).show();
+                                            }
+                                            super.onPostExecute(unused);
+                                        }
+                                    }.execute();
+                                }
+                            })
+
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton("Odrzuć", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    new AsyncTask<Void, Void, Void>() {
+
+                                        boolean result;
+
+                                        @Override
+                                        protected Void doInBackground(final Void... params) {
+
+                                            result = AtelierService.rejectEvent(finalEventId);
+                                            return null;
+                                        }
+
+                                        @Override
+                                        protected void onPostExecute(Void unused) {
+                                            ((MainActivity) getActivity()).navController.navigate(R.id.nav_home_events_list);
+
+                                            if (result) {
+                                                Toast.makeText(context, "Odrzucono", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(context, "Brak uprawnień", Toast.LENGTH_LONG).show();
+                                            }
+                                            super.onPostExecute(unused);
+                                        }
+                                    }.execute();
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            });
             return convertView;
         }
     }

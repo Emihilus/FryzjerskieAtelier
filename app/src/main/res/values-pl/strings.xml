@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Nagłóek nawigacji</string>
     <string name="action_settings">Ustawienia</string>
 
-    <string name="menu_events_list">Moje spotkania</string>
+    <string name="menu_events_list">Umówione spotkania</string>
     <string name="menu_calendar">Kalendarz</string>
     <string name="menu_services_list">Lista usług</string>
 </resources>
