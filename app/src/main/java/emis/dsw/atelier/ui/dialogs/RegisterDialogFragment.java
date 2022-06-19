@@ -1,4 +1,4 @@
-package emis.dsw.atelier.ui;
+package emis.dsw.atelier.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;

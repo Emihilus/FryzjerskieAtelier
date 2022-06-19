@@ -23,7 +23,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import emis.dsw.atelier.databinding.ActivityMainBinding;
-import emis.dsw.atelier.ui.LoginDialogFragment;
+import emis.dsw.atelier.ui.dialogs.LoginDialogFragment;
 import emis.dsw.atelier.utils.AtelierService;
 
 public class MainActivity extends AppCompatActivity {
