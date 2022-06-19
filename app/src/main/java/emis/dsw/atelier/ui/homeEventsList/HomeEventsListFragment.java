@@ -98,6 +98,7 @@ public class HomeEventsListFragment extends Fragment {
                         inflate(R.layout.fragment_events_list_item, parent, false);
             }
 
+            //////
             String eventId = "";
 
             try {
@@ -105,6 +106,39 @@ public class HomeEventsListFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            String clientName = "";
+
+            try {
+                clientName = source.getJSONObject(position).getString("firstname");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String clientSurname = "";
+
+            try {
+                clientSurname = source.getJSONObject(position).getString("surname");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String clientPhone = "";
+
+            try {
+                clientPhone = source.getJSONObject(position).getString("phone");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String clientEmail = "";
+
+            try {
+                clientEmail = source.getJSONObject(position).getString("email");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //////
 
             String serviceName = "";
 
@@ -150,12 +184,18 @@ public class HomeEventsListFragment extends Fragment {
             ((TextView) convertView.findViewById(R.id.my_events_service_when)).setText(eventDatetime);
 
             String finalEventId = eventId;
+            String finalClientName = clientName;
+            String finalClientSurname = clientSurname;
+            String finalClientPhone = clientPhone;
+            String finalClientEmail = clientEmail;
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new AlertDialog.Builder(context)
-                            .setTitle("Zmien status zgłoszenia")
-                            .setMessage("Zmien status zgłoszenia")
+                            .setTitle("Informacje o zgłoszeniu")
+                            .setMessage("Zgłaszający:  "+ finalClientName + " " + finalClientSurname + "\n" +
+                                    "Telefon: " + finalClientPhone +" \n" +
+                                    "E-mail: " + finalClientEmail)
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences prefs;
     String login;
     String pwd;
-    AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 
+        NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
 
         new AsyncTask<Void, Void, Void>() {
 
@@ -82,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(Void unused) {
                 if(result) {
                     prefs.edit().putString("SESSION", AtelierService.cookie).commit();
-
-                    NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, mAppBarConfiguration);
-                    NavigationUI.setupWithNavController(navigationView, navController);
-
 
                     navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
                         @Override
@@ -129,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     protected Void doInBackground(final Void... params) {
 
                         result = AtelierService.logout();
+                        finish();
                         return null;
                     }
                 }.execute();

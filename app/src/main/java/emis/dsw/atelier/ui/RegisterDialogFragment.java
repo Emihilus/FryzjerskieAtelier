@@ -74,6 +74,7 @@ public class RegisterDialogFragment extends DialogFragment {
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         RegisterDialogFragment.this.getDialog().cancel();
+                        new LoginDialogFragment().show(getActivity().getSupportFragmentManager(),"TAG");
                     }
                 });
         return builder.create();
